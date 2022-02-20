@@ -129,6 +129,54 @@ printed or iterated over, and to fail for every other operation.
 
     This is important if an object has an item and attribute with the same
     name.  Additionally, the :func:`attr` filter only looks up attributes.
+    
+Define variable
+~~~~~~~~~~~~~~~
+To define a variable within jinja you use the ``set`` function::
+
+    {% set A = "something" %}
+
+List and dictionaries::
+
+    {% set B = [1, 2, 3, 4] %}
+    {% set C = {"name": "Alice", "Age": 12 } %}
+
+Concatenate Variables 
+~~~~~~~~~~~~~~~~~~~~~
+To concatenate multiple variables::
+
+    {% set testing = ( test13, test23 ) %}
+
+Append variables
+~~~~~~~~~~~~~~~~
+To append a dictionaries, use the ``append`` function inside ``{{..}}`` ::
+
+    {% set host_ip = ['192.168.56.14', "192.168.56.13", "192.168.56.10"] %}
+    {% set port = '1234' %}
+    {% set server_ip = [] %}
+    {% for ip in host_ip  %}
+    {{ server_ip.append( ip+":"+port ) }}
+    {% endfor %}
+    {{ server_ip }}
+
+To append a dictionaries::
+
+    {% set host_ip = ['192.168.56.14', "192.168.56.13", "192.168.56.10"] %}
+    {% set port = '1234' %}
+    {% set server_ip = [] %}
+    {% for ip in host_ip  %}
+    {{ server_ip.append( {"ip": ip, "port": port} ) }}
+    {% endfor %}
+    {{ server_ip }}
+
+Remove item from variables
+~~~~~~~~~~~~~~~~
+
+To remove a item from a variable, use the ``remove`` function inside ``{{..}}``::
+
+{% set myList = ["Bran",11,22,33,"Stark",22,33,11] %}
+{{ myList.remove(22) }}
+{{ myList }}
 
 .. _filters:
 
